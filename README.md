@@ -1,91 +1,99 @@
 # CodeSense
 
-**Experimental / MVP v0.1** · A manual experiment in learning independent code judgment with AI-assisted review.
+> 用真实代码，发现问题，找到知识缺口，通过学习与实践，提升代码判断能力。
 
-> **Status:** Experimental. The learning method has not yet been validated. The next step is to run Case 001 and record what happens.
+**状态：Experimental / MVP v0.1。** 这是一个尚待实际运行验证的学习实验框架，不是成熟产品。当前没有证据证明这套方法已经有效；本仓库也不声称已经完成 Case 实验。
 
-CodeSense is a lightweight, case-based learning framework for people who want to understand code produced or changed with AI. It is not another automated code review product. It uses AI review as feedback, then asks the learner to explain the issue, revisit the original code, and try a related but different case.
+## MVP 目标与核心假设
 
-## Core hypothesis
+CodeSense 要验证的核心假设是：通过结构化的 AI Review、知识缺口定位、针对性学习、原代码再判断和迁移验证，能否帮助用户逐渐形成对 AI 生成或修改代码的独立判断能力。
 
-Structured AI-assisted review may help a beginner develop more independent code judgment when AI feedback is followed by targeted learning, a return to the original code, and a transfer check on a variation. This is a hypothesis to test, not a demonstrated result.
+这是待验证的假设，不是已证实的结论。v0.1 的目的，是先用真实案例运行学习流程，记录结果并发现流程问题，而不是先把它包装成完整产品。
 
-## Learning loop
+学习闭环：
 
 ```text
-Real code and its requirement
-        ↓
-AI review
-        ↓
-Learner's first judgment
-        ↓
-Compare judgments and identify a knowledge gap
-        ↓
-Targeted learning
-        ↓
-Return to the original code and explain it independently
-        ↓
-Try a variation that tests the same judgment ability
-        ↓
-Make an independent judgment on the variation
-        ↓
-Record the result and choose the next case
+真实代码
+   ↓
+准备 AI Review（首次判断前不展示参考答案）
+   ↓
+用户首次独立判断
+   ↓
+掌握度诊断与知识缺口定位
+   ↓
+针对性学习
+   ↓
+回到原代码再次判断
+   ↓
+AI 反馈
+   ↓
+生成变体
+   ↓
+迁移验证
+   ↓
+能独立判断？
+   ├─ 是 → 记录结果 → 下一 Case
+   └─ 否 → 定位剩余缺口 → 回到学习循环
 ```
 
-For a useful baseline, write down your first judgment before reading the AI review. Then compare it with the review. The review should point to evidence and explain its reasoning; it should not replace the learner's judgment.
+AI Review 是后续比较用的参考，不替用户完成首次判断。执行时先准备 Review 并暂时隐藏；用户保存首次判断后，再将两者进行比较。
 
-## What counts as a Case?
+## 一个 Case 是什么
 
-A Case is one **ability-training unit**, not just one code snippet or quiz question. It consists of:
+一个 Case **不是一道题**，而是一个能力训练单元：
 
-- A real code problem and its relevant requirement or context (the case's core scenario).
-- One specific code-judgment ability to practice.
-- One clearly different variation by default (a second variation only when needed) to check whether the judgment transfers.
+> **一个真实问题母题 + 一组围绕同一个核心判断能力生成的变体。**
 
-The variation should still exercise the same underlying ability while changing a meaningful condition. It should not merely rename variables or repeat the original example. See [the variation guide](docs/variation-generation.md).
+原代码提供真实学习材料；变体检查用户能否把同一判断能力迁移到不同结构或场景。变体应改变有意义的条件，而不是只改变量名。v0.1 默认每个 Case 先做 **1 个明显不同的变体**；必要时再做第 2 个。
 
-## v0.1 scope
+## v0.1 包含什么
 
-### Included in this manual MVP
+- Markdown 学习流程、Case 模板和结果记录模板。
+- 来自真实 AI Coding 项目的代码作为案例材料。
+- 人工执行的 AI Review、知识缺口诊断、针对性学习和反馈。
+- 回到原代码再次判断，以及人工检查的变体和迁移验证。
+- 对首次判断、证据、理由、不确定性和学习结果的记录。
 
-- A documented, manually run learning loop.
-- Case and result templates for recording the problem, first judgment, AI review, knowledge gap, learning, re-judgment, and transfer result.
-- Guidance for generating and checking variations by hand with AI assistance.
-- A small default: one variation per Case; add a second only when necessary.
+## v0.1 尚未实现
 
-### Not implemented
+- 自动扫描项目或自动发现候选 Case。
+- 自动代码分析引擎或自动变体出题器。
+- IDE 插件、Web UI、GitHub App 或完整 GitHub 自动化。
+- Agent 编排、大型知识库、用户等级系统、复杂数据库或企业级治理。
+- 任何关于学习成效的已验证结论。
 
-- Automated scanning or discovery of candidate cases.
-- An automatic question or variation generator.
-- IDE or GitHub integration, a web UI, or a standalone application.
-- Evidence that this method improves code judgment.
+## 手动运行
 
-## Run it manually
+1. 从真实 AI Coding 项目中选一个小而清楚的代码问题，填写 [cases/_template.md](cases/_template.md)。
+2. 先准备 AI Review 作为参考，但不要在用户首次判断前展示答案。
+3. 用户独立记录判断、代码证据、理由和不确定点。
+4. 对照首次判断与 Review，诊断具体能力表现和最小知识缺口。
+5. 只学习当前 Case 所需内容，然后回到原代码重新判断。
+6. 生成一个保留同一核心判断能力、但表面结构或场景明显不同的变体，进行独立判断。
+7. 用 [results/_template-result.md](results/_template-result.md) 记录过程和结果。原案例答对本身不代表已经掌握迁移能力。
 
-1. Choose a small, real change from an AI-assisted project and record its requirement and necessary context in a copy of [`cases/_template.md`](cases/_template.md).
-2. Write your initial judgment before reading the AI review. Record evidence, reasoning, and uncertainty.
-3. Ask an AI to review the code independently. Compare its findings with your baseline and identify the narrow knowledge gap.
-4. Study only what is needed to understand that gap, then return to the original code and explain your judgment without relying on the review text.
-5. Create one meaningfully different variation that exercises the same ability. Judge it independently, then record the outcome using [`results/_template-result.md`](results/_template-result.md).
-6. Keep the record, including misses and uncertainty. Do not describe a Case as mastered solely because the original example now looks familiar.
+完整步骤见 [learning-loop.md](learning-loop.md)；变体规则见 [docs/variation-generation.md](docs/variation-generation.md)；范围说明见 [docs/mvp-scope.md](docs/mvp-scope.md)。
 
-See [`learning-loop.md`](learning-loop.md) for the full procedure and [`docs/mvp-scope.md`](docs/mvp-scope.md) for the v0.1 boundaries.
+## 下一步
 
-## Next step
+实际运行 **Case 001**。保留首次判断、Review、知识缺口、原代码再次判断和变体迁移结果，再根据真实过程决定是否调整 v0.1 流程。单次运行用于观察和改进，不作为方法有效的证明。
 
-Run **Case 001** on real code. Record the first judgment, AI review, learning gap, re-judgment, and variation result before changing the framework. The first run is an experiment, not proof that CodeSense works.
-
-## Repository map
+## 目录
 
 ```text
-learning-loop.md             Step-by-step manual workflow
-cases/_template.md           Template for a real code Case
-results/_template-result.md  Template for recording a learning run
-docs/variation-generation.md Guidance for transfer variations
-docs/mvp-scope.md            v0.1 included and excluded scope
+CodeSense/
+├── README.md
+├── learning-loop.md
+├── cases/
+│   └── _template.md
+├── results/
+│   └── _template-result.md
+└── docs/
+    ├── mvp-scope.md
+    └── variation-generation.md
 ```
 
 ## License
 
-No license has been added in this experimental release. All rights remain with the copyright holder unless a license is added.
+本版本未附带开源许可证。
 
