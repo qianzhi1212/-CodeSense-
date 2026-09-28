@@ -1,57 +1,163 @@
-# Case [ID]: [short title]
+# Case XXX
 
-## 1. Source and context
+## 1. Case 基本信息
 
-- Source project / change:
-- File and location:
-- Why this is a real case:
-- Minimum context needed:
+### 来源项目
 
-## 2. Requirement
+> 填写真实 AI Coding 项目名称。
 
-What should the code do? Include relevant constraints and expected behavior.
+### Case 类型
 
-## 3. Code under review
+> 例如：逻辑错误 / 输入处理 / 错误处理 / 数据流 / 测试等。
+
+### 选择原因
+
+> 为什么选择这个 Case？
+
+---
+
+## 2. 原始需求
+
+> 用户原本希望代码实现什么？
+
+---
+
+## 3. 真实代码
 
 ```text
-Paste the smallest useful real code excerpt or diff here.
+在这里放代码。
 ```
 
-## 4. Core judgment ability
+---
 
-What specific ability does this Case train? State it as a judgment the learner should be able to make, not as a broad topic.
+## 4. 必要上下文
 
-## 5. Learner's first judgment (before AI review)
+> 只提供理解这段代码所必需的上下文。
 
-- Is there a problem?
-- What is the evidence?
-- Why does it matter?
-- What is uncertain?
+---
 
-## 6. AI review
+## 5. 核心判断能力
 
-Record the independent review, including its evidence, reasoning, assumptions, and uncertainty.
+> 这个 Case 最终希望用户学会什么判断？
 
-## 7. Comparison and knowledge gap
+### 判断所依赖的条件
 
-- Where did the learner and review agree?
-- What was missed, disputed, or incorrectly flagged?
-- What is the smallest knowledge gap to address?
+> 哪些条件决定这个判断？
 
-## 8. Targeted learning
+### 代码实际检查/保证了什么
 
-Record the explanation or material used and summarize the concept in the learner's own words.
+> 不做推测，只写代码能够证明的内容。
 
-## 9. Re-judgment of the original code
+### 没有被证明什么
 
-Explain the judgment again without copying the AI review. Include evidence and remaining uncertainty.
+> 哪些需求或条件没有被当前代码覆盖？
 
-## 10. Variation plan
+---
 
-- Same underlying judgment ability:
-- Meaningful change from the original:
-- What the variation does and does not test:
-- How the answer will be kept hidden until the learner commits:
+## 6. 用户任务
 
-Add the actual variation and result to the matching file under `results/`.
+请先独立判断：
+
+1. 这段代码有没有问题？
+2. 如果有，问题是什么？
+3. 代码证据在哪里？
+4. 为什么这样判断？
+5. 哪些地方不确定？
+
+> 注意：完成首次判断后，再查看/生成 AI Review。
+
+---
+
+## 7. AI Review（参考答案）
+
+### 问题
+
+> 待填写。
+
+### 代码证据
+
+> 待填写。
+
+### 影响
+
+> 待填写。
+
+### 相关知识点
+
+> 待填写。
+
+### 参考判断
+
+> 待填写。
+
+---
+
+## 8. 知识缺口
+
+> 根据用户首次判断与参考 Review 的差异填写。
+
+---
+
+## 9. 针对性学习
+
+> 只记录当前 Case 所需的学习内容。
+
+---
+
+## 10. 原代码再次判断
+
+> 学习后重新独立判断。
+
+---
+
+## 11. 变体生成
+
+### 变体生成依据
+
+> 本变体保留的核心判断能力是什么？
+
+### 改变了什么
+
+> 结构 / 数据 / 场景 / 实现方式 / 表面信息等。
+
+### 为什么仍然测试同一个能力
+
+> 解释底层判断是否保持一致。
+
+### 变体
+
+> 放入新的代码或场景。
+
+---
+
+## 12. 迁移验证
+
+### 新案例
+
+> 放入结构或场景不同、但测试相同判断能力的新案例。
+
+### 用户判断
+
+> 待填写。
+
+### 验证结果
+
+> 待填写。
+
+---
+
+## 13. Case 结论
+
+### 是否达到独立判断
+
+- [ ] 是
+- [ ] 否
+
+### 依据
+
+> 为什么？
+
+### 后续
+
+> 下一 Case / 继续当前学习 / 补充最小基础知识
 
