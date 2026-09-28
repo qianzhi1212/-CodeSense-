@@ -1,23 +1,82 @@
-# MVP scope: v0.1
+# CodeSense MVP Scope v0.1
 
-**Status: Experimental / manual learning-loop prototype.** This document describes the intended v0.1 workflow; it does not claim that the workflow has been tested or shown to be effective.
+## 目标
 
-## Included
+验证 CodeSense 的学习闭环，而不是开发完整产品。
 
-- A repeatable manual loop: real code, AI review, learner judgment, gap identification, targeted learning, re-judgment of the original, variation, and independent transfer judgment.
-- One Case as one judgment-ability training unit built around a real problem scenario and a small set of variations.
-- A default of one clearly different variation per Case; a second may be used when needed.
-- Markdown templates and guidance for recording cases and results.
-- Human review of AI feedback and generated variations.
+核心假设：
 
-## Excluded for v0.1
+> AI Review → 用户首次判断 → 掌握度诊断 → 针对性学习 → 原代码再次判断 → 迁移验证
 
-- Automated case discovery or project scanning.
-- An automated variation or question generator.
-- An IDE extension, GitHub integration, web interface, or standalone application.
-- Claims that CodeSense improves learning or code-review ability.
+能够帮助用户提升独立代码判断能力。
 
-## Validation status and next step
+## MVP 包含
 
-No learning outcome is claimed in this release. The next step is to run Case 001 on real code, preserve the baseline and full result, and use the observed friction to decide what to revise in a later version.
+- Markdown Case
+- Markdown 学习流程
+- Markdown 实验结果
+- 真实 AI Coding 项目作为案例来源
+- AI 作为 Review / 教学 / 反馈辅助
+- 用户自己完成判断
+- 原代码再次判断
+- 变体生成
+- 新案例/变体迁移验证
+- Case 作为“真实母题 + 判断能力变体”的训练单元
+
+## MVP 暂不包含
+
+- Web UI
+- IDE 插件
+- GitHub App
+- 自动代码分析引擎
+- Agent 编排
+- 大型知识库
+- 用户等级/积分系统
+- 复杂数据库
+- 企业级治理
+- 自动化完整 Git 流程
+
+## 何时考虑重构
+
+当多个 Case 运行后出现稳定、重复、人工成本高的问题，再考虑自动化。
+
+例如：
+
+- 每次生成 Case 的步骤高度重复；
+- Review 格式已经稳定；
+- 诊断指标已经稳定；
+- 迁移测试已经形成稳定规则；
+- 人工记录开始成为主要负担。
+
+此时再从实验框架中提取程序模块。
+
+## 原则
+
+**先验证逻辑，再自动化；先验证需求，再设计产品。**
+
+
+## 变体生成的 MVP 边界
+
+第一版不开发自动出题引擎。
+
+先由 AI 按 `docs/variation-generation.md` 的规则辅助生成变体，用户检查：
+
+1. 是否仍然测试同一个判断能力；
+2. 是否改变了表面结构/场景；
+3. 是否不能靠记忆原答案解决；
+4. 是否存在明确可验证的判断依据。
+
+默认每个 Case 先做 **1 个明显不同的变体**；必要时再做第 2 个。
+
+## 何时考虑自动化
+
+当多个 Case 运行后出现稳定、重复、人工成本高的问题，再考虑自动化。
+
+例如：
+
+- 变体生成规则已经稳定；
+- 变体质量检查已经稳定；
+- 人工生成开始成为主要负担。
+
+**先验证“变体能不能有效测迁移”，再开发“自动变题器”。**
 
