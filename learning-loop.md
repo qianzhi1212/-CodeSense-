@@ -1,43 +1,342 @@
-# CodeSense learning loop
+# CodeSense Learning Loop v0.1
 
-This document describes the manual v0.1 experiment. Keep the stages separate so the learner's judgment and the AI review can be compared.
+## 1. 目的
 
-## 1. Select a real code problem
+本流程用于验证：
 
-Use a small, real code change from an AI-assisted project. Capture the requirement, relevant code, source, and only the context needed to judge behavior. Avoid inventing a clean example just to make the exercise easy.
+> 通过 AI Review、用户自主判断、知识缺口定位、针对性学习、再次判断和迁移验证，用户是否能够逐渐形成独立的代码判断能力。
 
-## 2. Record the learner's first judgment
+**一个 Case 不是一道题，而是一个完整的能力训练单元。**
 
-Before reading AI feedback, write down:
+一个 Case 包含：
 
-- Whether you think the code has a problem.
-- What the problem is and where the evidence appears.
-- Why it matters relative to the requirement.
-- What you are uncertain about.
+```text
+真实问题母题
+   +
+围绕同一判断能力生成的变体题
+```
 
-This is the baseline. Preserve it unchanged.
+因此，一个 Case 可以产生一组题，但这些题不应只是换变量名，而应测试同一个底层判断能力在不同结构/场景下能否迁移。
 
-## 3. Request an independent AI review
+---
 
-Ask the AI to review the requirement and code without using your baseline. Request concrete code evidence, reasoning, possible impact, and relevant knowledge areas. Ask it to state assumptions and uncertainty. Do not ask it to teach yet.
+## 2. 完整流程
 
-## 4. Compare and identify the knowledge gap
+```text
+真实代码
+   ↓
+AI Review
+   ↓
+用户首次判断
+   ↓
+掌握度诊断
+   ↓
+知识缺口定位
+   ↓
+针对性学习
+   ↓
+回到原代码再次判断
+   ↓
+AI 反馈
+   ↓
+变体生成
+   ↓
+迁移验证
+   ↓
+能独立判断？
+   ├─ 是 → Case 结束 → 下一 Case
+   └─ 否 → 回到学习循环
+```
 
-Compare your baseline with the review. Separate missed issues from disagreements and false alarms. Identify the smallest knowledge gap that explains a missed or weak judgment; do not turn every Case into a broad programming lesson.
+---
 
-## 5. Learn only what the gap requires
+## 3. Step 1：真实代码
 
-Study the relevant concept using the original code as context. Ask for a short explanation, a simple contrast, and a chance to explain the concept back in your own words. Keep the review available as feedback, not as a substitute for your reasoning.
+从真实 AI Coding 项目中选择一个代码片段。
 
-## 6. Re-judge the original code
+要求：
 
-Set aside the AI's conclusion and revisit the requirement and code. Explain the issue, evidence, rationale, and limits in your own words. Record what changed from the baseline and what remains uncertain.
+- 有明确的原始需求或预期行为。
+- 代码规模足够小，可以在一次学习中处理。
+- 用户能够接触到实际代码。
+- 初期优先选择低风险、边界清楚的案例。
 
-## 7. Generate and judge a variation
+记录：
 
-Create one meaningfully different scenario that still tests the same judgment ability. Do not reveal the intended answer before the learner commits to a judgment. Record the variation and the learner's reasoning. A second variation is optional when one result is ambiguous.
+- 来源项目
+- 原始需求
+- 相关代码
+- 必要的上下文
+- 预期行为
 
-## 8. Record and continue
+---
 
-Use `results/_template-result.md` to record the baseline, AI feedback, learning, re-judgment, and transfer result. A correct answer on the original case alone does not establish transfer. Keep misses and uncertainty in the record, then select the next real Case.
+## 4. Step 2：AI Review
+
+AI 在用户首次判断前准备一份参考 Review。
+
+至少包含：
+
+- 发现的问题
+- 代码证据
+- 影响
+- 相关知识点
+- 参考判断
+
+**实验执行时，不应在用户首次判断前直接展示参考答案。**
+
+AI Review 的作用是建立后续诊断所需的参考基准，不是替用户完成判断。
+
+---
+
+## 5. Step 3：用户首次判断
+
+用户先独立分析代码。
+
+至少回答：
+
+1. 有没有问题？
+2. 如果有，问题是什么？
+3. 代码证据在哪里？
+4. 为什么这样判断？
+5. 哪些地方不确定？
+
+必须保留原始答案。
+
+它是后续比较学习效果的基线。
+
+---
+
+## 6. Step 4：掌握度诊断
+
+比较用户首次判断与参考 Review。
+
+不要只记录“对/错”。
+
+关注：
+
+- 是否发现问题
+- 是否定位到代码证据
+- 是否解释问题原因
+- 是否理解影响
+- 是否能说出判断依据
+- 哪些地方存在不确定性
+
+然后定位具体知识缺口。
+
+示例：
+
+```text
+发现问题：否
+定位证据：否
+解释原因：否
+主要缺口：不了解输入验证与数据流之间的关系
+```
+
+---
+
+## 7. Step 5：针对性学习
+
+只补当前 Case 所需要的知识。
+
+学习内容应围绕：
+
+- 当前问题是什么
+- 为什么会产生问题
+- 当前代码哪里体现
+- 如果不处理会发生什么
+- 如何识别同类问题
+
+避免因为一个 Case 直接展开成完整课程。
+
+---
+
+## 8. Step 6：回到原代码再次判断
+
+学习结束后，回到原始代码。
+
+要求用户在不直接查看答案的情况下重新判断：
+
+- 问题是什么
+- 证据在哪里
+- 为什么
+- 影响是什么
+
+记录第二次判断。
+
+这里验证的是：
+
+> 学习后，用户是否真的能够重新理解原问题。
+
+---
+
+## 9. Step 7：AI 反馈
+
+AI 对比：
+
+- 用户首次判断
+- 学习内容
+- 用户第二次判断
+- 参考 Review
+
+反馈：
+
+- 哪些已经掌握
+- 哪些仍然错误
+- 哪些解释不完整
+- 下一步需要补什么
+
+AI 的“正确”反馈不能单独作为掌握证明。
+
+应尽量回到实际代码、Diff、测试或其他可观察证据。
+
+---
+
+## 10. Step 8：变体生成
+
+**变体是迁移验证的核心，不是简单出几道相似题。**
+
+### 10.1 先提取核心判断能力
+
+AI 先明确：
+
+```text
+核心判断能力：
+用户最终需要学会什么判断？
+
+判断所依赖的条件：
+哪些条件决定这个判断？
+
+原 Case 实际检查了什么：
+代码真正保证了什么？
+
+没有覆盖什么：
+哪些条件没有被代码证明？
+```
+
+### 10.2 再改变条件生成变体
+
+变体可以改变：
+
+- 代码结构
+- 数据/节点结构
+- 变量名
+- 业务场景
+- 实现方式
+- 表面信息
+
+但必须保留：
+
+> **同一个底层判断能力。**
+
+例如原 Case 学“检查了一个条件 ≠ 证明整个需求”，变体可以从工作流换成登录/权限/输入验证，但仍测试“实际检查范围是否覆盖需求”。
+
+### 10.3 变体质量要求
+
+一个合格变体：
+
+1. 不能直接复用原代码答案。
+2. 不直接提示正在考什么。
+3. 至少改变一个关键结构或场景。
+4. 仍然测试同一个核心判断能力。
+5. 不能依赖用户记忆原 Case 的答案。
+6. 必须存在可验证的判断依据。
+7. 用户必须说明“为什么”，不能只给结论。
+
+---
+
+## 11. Step 9：迁移验证
+
+MVP 不要求大量题目。
+
+默认：
+
+```text
+原代码再次判断 → 变体 1 → 必要时变体 2
+```
+
+至少通过一次与原 Case 表面形式明显不同的变体，才能把“学会”作为暂时成立。
+
+如果变体失败：
+
+```text
+变体失败
+   ↓
+定位新的具体缺口
+   ↓
+补最小知识
+   ↓
+重新验证
+```
+
+---
+
+## 12. Step 10：独立判断判定
+
+满足以下条件时，可以结束当前 Case：
+
+- 能发现核心问题；
+- 能指出代码证据；
+- 能解释为什么；
+- 能说明主要影响；
+- 回到原代码后能够独立判断；
+- 在至少一个明显不同的变体中仍能独立判断。
+
+如果只在原案例上答对，但迁移案例失败：
+
+> 不视为完成，回到学习循环。
+
+如果仍无法独立判断：
+
+> 记录当前缺口，继续针对性学习。
+
+---
+
+## 12. Case 结束
+
+结束后记录：
+
+- 学习前表现
+- 学习后表现
+- 迁移验证结果
+- 已掌握内容
+- 未掌握内容
+- 后续需要关注的知识缺口
+
+然后进入下一轮真实代码 Case。
+
+---
+
+## 13. 当前阶段的停止条件
+
+如果发现：
+
+- 用户完全不知道代码在做什么；
+- 当前 Case 所需基础知识明显超出范围；
+- 无法判断 AI Review 是否有依据；
+- 代码上下文严重不足；
+- 案例本身存在明显歧义；
+
+不要硬跑流程。
+
+记录问题并调整 Case 或补充最小必要基础知识。
+
+---
+
+## 14. 重要边界
+
+CodeSense MVP 当前验证的是**学习逻辑**，不是完整代码审查系统。
+
+因此：
+
+- 不要求自己实现代码分析引擎。
+- 不要求训练模型。
+- 不要求做 Agent。
+- 不要求做 IDE 插件。
+- 不要求建立大型知识库。
+- 不要求先建立复杂用户画像。
+
+先证明：
+
+> **这个学习循环本身值得继续做。**
 
