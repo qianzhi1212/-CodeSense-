@@ -1,34 +1,99 @@
-# Variation generation
+# CodeSense 变体生成规则 v0.1
 
-The purpose of a variation is to check whether a learner can apply the same judgment ability in a changed scenario. It is not a request to produce more questions for their own sake.
+## 1. 目的
 
-## Manual process
+变体不是为了增加题量，而是为了验证：
 
-1. State the core judgment ability exercised by the original Case.
-2. Identify the condition or evidence the original judgment depends on.
-3. Change one meaningful aspect of the scenario while preserving the underlying ability.
-4. Check that the variation has enough context to judge and that its intended conclusion is defensible.
-5. Keep the expected answer hidden until the learner records an independent judgment.
+> 用户学到的是可迁移的判断能力，而不是原 Case 的答案。
 
-## A variation is useful when
+因此：
 
-- It looks meaningfully different from the original in context, structure, or conditions.
-- It still exercises the same underlying judgment ability.
-- The learner can reason from the information provided.
-- Its expected answer can be explained with concrete evidence.
+> **一个 Case = 一个真实问题母题 + 一组围绕同一判断能力生成的变体。**
 
-Changing names or formatting alone is not enough. A variation that tests a different ability is a new Case, not a transfer check for the current one.
-
-## Suggested AI prompt
+## 2. 生成顺序
 
 ```text
-Given the Case below, identify the specific code-judgment ability it tests.
-Propose one meaningfully different variation that still tests that same ability.
-Change a relevant condition or structure; do not merely rename variables.
-Do not reveal the answer in the learner-facing version. Also provide a separate
-facilitator note with the intended judgment, evidence, assumptions, and what the
-variation does not test. Flag any ambiguity that would make the result unreliable.
+原 Case
+   ↓
+提取核心判断能力
+   ↓
+提取判断所依赖的条件
+   ↓
+明确代码实际保证了什么
+   ↓
+明确没有保证什么
+   ↓
+改变一个或多个表面条件
+   ↓
+生成变体
+   ↓
+检查是否仍测试同一个能力
+   ↓
+交给用户独立判断
 ```
 
-Review the proposed variation yourself before using it. AI-generated variations are suggestions, not validated assessment items. Use one by default; add a second only when the first result is ambiguous or insufficient.
+## 3. 四个必须先回答的问题
+
+- 核心判断能力：用户最终需要学会什么判断？
+- 判断条件：哪些条件决定这个判断？
+- 当前代码实际保证什么：只记录代码证据能够支持的结论。
+- 当前代码没有保证什么：明确验证范围和缺口。
+
+## 4. 可以改变什么
+
+变体可以改变：
+
+- 代码结构
+- 数据/节点结构
+- 变量名
+- 业务场景
+- 实现方式
+- 表面信息
+
+但必须保留：
+
+> **同一个底层判断能力。**
+
+## 5. 不能做什么
+
+变体不得：
+
+- 直接复制原代码后只改变量名；
+- 直接告诉用户考点；
+- 依赖记忆原 Case 的答案；
+- 引入与当前能力无关的大量新知识；
+- 制造没有明确判断依据的“脑筋急转弯”。
+
+## 6. 最小迁移验证
+
+MVP 默认：
+
+```text
+原代码再次判断
+      ↓
+变体 1
+      ↓
+必要时变体 2
+```
+
+至少通过一个与原 Case 表面形式明显不同的变体，才能把“学会”作为暂时成立。
+
+## 7. 变体质量检查
+
+| 检查项 | 是/否 |
+|---|---|
+| 是否仍测试同一个核心判断能力？ | |
+| 是否改变了表面结构或场景？ | |
+| 是否不能靠背原答案解决？ | |
+| 是否有明确代码/事实证据支持判断？ | |
+| 是否避免引入无关的大量新知识？ | |
+| 用户是否必须解释“为什么”？ | |
+
+## 8. 当前 MVP 原则
+
+第一版不开发自动出题引擎。
+
+先让 AI 按本规则辅助生成，用户只负责检查变体是否合理。
+
+> **先验证“变体能不能有效测迁移”，再开发“自动变题器”。**
 
