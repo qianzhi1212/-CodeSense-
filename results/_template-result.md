@@ -1,43 +1,155 @@
-# Result: Case [ID]
+# Case XXX Result
 
-## First judgment (before AI review)
+## 1. 用户首次判断
 
-- Conclusion:
-- Evidence and reasoning:
-- Uncertainty:
+### 我的判断
 
-## AI review and comparison
+> 原样记录用户第一次分析。
 
-- AI findings:
-- Agreement / disagreement:
-- Misses or false alarms:
+### 我的不确定点
 
-## Knowledge gap and targeted learning
+> 原样记录。
 
-- Gap identified:
-- What was studied:
-- Learner's explanation in their own words:
+---
 
-## Re-judgment of original code
+## 2. AI Review 对照
 
-- Independent conclusion:
-- Evidence and reasoning:
-- What changed from the baseline:
-- Remaining uncertainty:
+### AI 发现的问题
 
-## Variation and transfer check
+> ...
 
-- Variation (or link to it):
-- Same judgment ability being checked:
-- Learner's independent judgment:
-- Evidence and reasoning:
-- Outcome: [transfer demonstrated / not demonstrated / unclear]
+### 代码证据
 
-## Reflection
+> ...
 
-- What did this run show about the process?
-- What should change for the next Case?
-- Next Case:
+### AI 认为的影响
 
-Do not treat one run as evidence that the method works in general. Preserve the result, including failure or ambiguity.
+> ...
+
+### 相关知识点
+
+> ...
+
+---
+
+## 3. 掌握度诊断
+
+| 能力 | 首次表现 | 说明 |
+|---|---|---|
+| 发现问题 |  |  |
+| 定位代码证据 |  |  |
+| 解释原因 |  |  |
+| 理解影响 |  |  |
+| 给出判断依据 |  |  |
+
+### 当前知识缺口
+
+> ...
+
+---
+
+## 4. 针对性学习
+
+### 学习目标
+
+> ...
+
+### 学习内容
+
+> ...
+
+---
+
+## 5. 原代码第二次判断
+
+### 我的新判断
+
+> ...
+
+### 与第一次相比
+
+> ...
+
+### 是否能够独立解释
+
+- [ ] 是
+- [ ] 否
+
+---
+
+## 6. AI 反馈
+
+### 已掌握
+
+> ...
+
+### 仍存在的问题
+
+> ...
+
+### 建议的下一步
+
+> ...
+
+---
+
+## 7. 变体生成记录
+
+### 核心判断能力
+
+> ...
+
+### 变体改变点
+
+> ...
+
+### 为什么仍然测试同一能力
+
+> ...
+
+---
+
+## 8. 迁移验证
+
+### 新 Case
+
+> ...
+
+### 我的判断
+
+> ...
+
+### 是否独立发现同类问题
+
+- [ ] 是
+- [ ] 否
+
+### 证据与理由
+
+> ...
+
+---
+
+## 9. 最终结果
+
+### 本 Case 是否完成
+
+- [ ] 是
+- [ ] 否
+
+### 判断依据
+
+> ...
+
+### 本轮新增能力
+
+> ...
+
+### 尚未掌握
+
+> ...
+
+### 后续行动
+
+> 下一 Case / 继续学习 / 补充最小基础知识
 
